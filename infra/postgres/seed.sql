@@ -6,7 +6,7 @@ INSERT INTO assets (name, price) VALUES
   ('RENT3', 55.60), ('MGLU3',  2.40), ('LREN3', 18.70),
   ('BBAS3', 56.40);
 
-INSERT INTO ordens (account_id, asset_id, type, quantity, status)
+INSERT INTO orders (account_id, asset_id, type, quantity, status)
 SELECT
     1,
     (floor(random() * 10) + 1)::int,

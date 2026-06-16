@@ -9,7 +9,7 @@ CREATE TABLE assets (
     price  NUMERIC(15, 2) NOT NULL
 );
 
-CREATE TABLE ordens (
+CREATE TABLE orders (
     id         SERIAL PRIMARY KEY,
     account_id   INTEGER NOT NULL REFERENCES accounts(id),
     asset_id   INTEGER NOT NULL REFERENCES assets(id),
