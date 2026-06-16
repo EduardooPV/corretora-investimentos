@@ -1,1 +1,8 @@
+# Claude
 CLAUDE.md
+
+# .Net
+api/**/bin/
+api/**/obj/
+api/**/*.user
+**/appsettings.Development.json
