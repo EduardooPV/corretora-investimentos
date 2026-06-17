@@ -6,3 +6,9 @@ api/**/bin/
 api/**/obj/
 api/**/*.user
 **/appsettings.Development.json
+
+# Nestjs
+bff/node_modules/
+bff/dist/
+bff/.eslintcache
+bff/.prettiercache
