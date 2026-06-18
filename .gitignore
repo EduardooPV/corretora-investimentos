@@ -12,3 +12,11 @@ bff/node_modules/
 bff/dist/
 bff/.eslintcache
 bff/.prettiercache
+bff/.env
+
+# Web
+web/node_modules/
+web/dist/
+web/.eslintcache
+web/.prettiercache
+web/.env
