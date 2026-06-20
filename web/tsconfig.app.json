@@ -3,6 +3,10 @@
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
+    // TypeScript strict mode: habilita várias verificações (`noImplicitAny`,
+    // `strictNullChecks`, etc.). Bom para treinar tipagem mais rígida.
+    "strict": true,
+
     // Extra safety for array and object lookups, but may have false positives.
     "noUncheckedIndexedAccess": true,
 
