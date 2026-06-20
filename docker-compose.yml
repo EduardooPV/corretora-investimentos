@@ -12,6 +12,14 @@ services:
       - ./infra/postgres/seed.sql:/docker-entrypoint-initdb.d/02-seed.sql
       - postgres_data:/var/lib/postgresql/data
     command: ["postgres", "-c", "log_statement=all", "-c", "log_min_duration_statement=0"]
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    environment:
+      KC_BOOTSTRAP_ADMIN_USER: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    ports:
+      - "8080:8080"
+    command: ["start-dev"]
 
 volumes:
   postgres_data:
