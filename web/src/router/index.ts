@@ -6,12 +6,28 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      redirect: "/orders",
+      redirect: "/home",
+    },
+    {
+      path: "/home",
+      name: "home",
+      component: () => import("../views/HomeView.vue"),
     },
     {
       path: "/orders",
       name: "orders",
+      meta: { roles: ["admin"] },
       component: () => import("../views/OrdersView.vue"),
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: () => import("../views/ProfileView.vue"),
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("../views/LoginView.vue"),
     },
     {
       path: "/callback",

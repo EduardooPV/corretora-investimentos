@@ -1,3 +1,4 @@
+import type { ITokenResponse } from "./auth.types";
 import { generateCodeChallenge, generateCodeVerifier } from "./pkce";
 
 export const login = async () => {
@@ -54,13 +55,27 @@ export const handleCallback = async () => {
       throw new Error(`Token exchange falhou: ${response.status}`);
     }
 
-    const token = await response.json();
+    const token = (await response.json()) as ITokenResponse;
 
     sessionStorage.setItem("access-token", token.access_token);
+    sessionStorage.setItem("refresh-token", token.refresh_token);
     sessionStorage.removeItem("code-verifier");
   } catch (error) {
     console.error(error);
     throw error;
+  }
+};
+
+export const getUserRoles = (): string[] => {
+  const token = sessionStorage.getItem("access-token");
+  if (!token) return [];
+  try {
+    const payloadPart = token.split(".")[1];
+    if (!payloadPart) return [];
+    const payload = JSON.parse(atob(payloadPart));
+    return payload?.realm_access?.roles ?? [];
+  } catch {
+    return [];
   }
 };
 
@@ -72,4 +87,43 @@ export const getAccessToken = () => {
   }
 
   return token;
+};
+
+export const refreshToken = async () => {
+  const refreshToken = sessionStorage.getItem("refresh-token");
+
+  if (!refreshToken) {
+    throw new Error("Refresh token inválido.");
+  }
+
+  const body = new URLSearchParams({
+    grant_type: "refresh_token",
+    client_id: "corretora-web",
+    refresh_token: refreshToken,
+  });
+
+  try {
+    const response = await fetch(
+      "http://localhost:8080/realms/corretora/protocol/openid-connect/token",
+      {
+        method: "POST",
+        body,
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded",
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Token exchange falhou: ${response.status}`);
+    }
+
+    const token = (await response.json()) as ITokenResponse;
+
+    sessionStorage.setItem("access-token", token.access_token);
+    sessionStorage.setItem("refresh-token", token.refresh_token);
+  } catch (error) {
+    console.error(error);
+    await login();
+  }
 };

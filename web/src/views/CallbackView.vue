@@ -11,6 +11,6 @@ const router = useRouter();
 
 onMounted(async () => {
   await handleCallback()
-  router.push('/orders')
+  router.push('/home')
 })
 </script>
