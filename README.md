@@ -26,7 +26,7 @@ A stack cobre o ciclo completo de uma aplicação financeira de produção: fron
 
 ## Fases
 
-### Fase 0 — Walking Skeleton (N+1)
+### Fase 0 — Walking Skeleton (N+1) ✅
 **Goal:** Conexão end-to-end funcional.
 
 `Web → BFF → .NET → PostgreSQL`
@@ -36,7 +36,7 @@ A stack cobre o ciclo completo de uma aplicação financeira de produção: fron
 
 ---
 
-### Fase 1 — Autenticação (Auth)
+### Fase 1 — Autenticação (Auth) ✅
 **Goal:** Rotas seguras com identidade verificada.
 
 - Login via Keycloak com OAuth2 + PKCE
